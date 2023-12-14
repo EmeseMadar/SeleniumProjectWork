@@ -6,7 +6,12 @@ package hu.masterfield.utils;
  */
 
 public class Consts {
-    //Konstansok az elérési utakhoz
+    // Konstansok az applikációhoz
+
+    public static final String APPLICATION_URL ="application.url";
+
+    //Konstansok az elérési utakhoz:
+    public static final String CONFIG_PROPERTIES = "/config.properties";
     public static final String GLOBAL_TEST_DATA_PROPERTIES = "/globalTestData.properties";
     public static final String SCREENSHOTS_FOLDER = System.getProperty("user.dir").replace("\\", "/") + "target/screenshots";
 
