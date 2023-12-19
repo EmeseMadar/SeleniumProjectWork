@@ -13,7 +13,7 @@ public class Consts {
     //Konstansok az elérési utakhoz:
     public static final String CONFIG_PROPERTIES = "/config.properties";
     public static final String GLOBAL_TEST_DATA_PROPERTIES = "/globalTestData.properties";
-    public static final String SCREENSHOTS_FOLDER = System.getProperty("user.dir").replace("\\", "/") + "target/screenshots";
+    public static final String SCREENSHOTS_FOLDER = System.getProperty("user.dir").replace("\\", "/") + "/target/screenshots";
 
     //Konstansok a loginhoz
     public static final String LOGIN_USERNAME = "login.userName";

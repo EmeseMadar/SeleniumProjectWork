@@ -23,7 +23,7 @@ public class Screenshot {
 
     @Attachment(value = "Képernyőmentés", type = "image/png")
     public static byte[] takesScreenshot(WebDriver driver) throws IOException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
         String timestamp = dateFormat.format(new Date());
 
         byte[] screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -34,7 +34,7 @@ public class Screenshot {
         } else {
             Files.createDirectory(Path.of(screenshotsFolder));
         }
-        String filePath = screenshotsFolder + " /DBankDemo_src_" + timestamp + ".png";
+        String filePath = screenshotsFolder + "/DBankDemo_src_" + timestamp + ".png";
 
         Path directory = Paths.get(screenshotsFolder);
 
