@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>SeleniumProjectWork2</artifactId>
+    <artifactId>SeleniumProjectWork</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -148,7 +148,6 @@
                         <include>**/**Test.java</include>
                     </includes>
                 </configuration>
-
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
