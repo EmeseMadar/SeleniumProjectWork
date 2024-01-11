@@ -13,22 +13,21 @@ import org.junit.jupiter.api.TestInfo;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * TC1 - GDPR nyilatkozat sikeres elfogadása
+ * TC2 - Sikeres regisztráció érvényes adatok megadásával
  */
-public class TC1_GDPR_Test extends BaseTest {
-    protected static Logger logger = LogManager.getLogger(TC1_GDPR_Test.class);
+public class TC2_Registration_Test extends BaseTest {
+    private static Logger logger = LogManager.getLogger(TC2_Registration_Test.class);
 
     @Test
-    @DisplayName("TC1_GDPR_Test")
-    @Description("TC1-GDPR nyilatkozat sikeres elfogadása")
-    @Tag("TC1")
-    @Tag("GDPR")
+    @DisplayName("TC2_Registration") //JUnit-hoz
+    @Description("TC2-Sikeres regisztráció tesztelése érvényes adatokkal") //Allure riporthoz
+    @Tag("TC2") //Allure reportban is megjelenik
+    @Tag("Regisztráció")
 
-    public void test_TC1_GDPR(TestInfo testInfo) throws IOException, InterruptedException {
+    public void TC2_Registration_Test(TestInfo testInfo) throws IOException, InterruptedException {
         Thread.sleep(5000);
         logger.info(testInfo + " started");
 
@@ -36,22 +35,21 @@ public class TC1_GDPR_Test extends BaseTest {
 
         //a süti elfogadására szolgáló ablak megjelenésének ellenőrzése
         assertTrue(gdprBannerPage.isCookieMessageVisible());
-        //BasePage.takesScreenshot();
         Screenshot.takesScreenshot(driver);
         gdprBannerPage.acceptCookies();
         Screenshot.takesScreenshot(driver);
         logger.info("Login page will be opened...");
 
-        logger.info("Login");
         LoginPage loginPage = new LoginPage(driver);
         assertTrue(loginPage.isLoaded());
+        loginPage.registrationStart();
 
-        /*
-        A sütik elfogadására szolgáló ablak vizsgálata, hogy az elfogadás után látható-e még.
-        */
-        assertFalse(loginPage.isCookieVisible());
-        Screenshot.takesScreenshot(driver);
 
-        Thread.sleep(5000);
+
+
+
     }
+
+
+
 }

@@ -1,5 +1,6 @@
 package hu.masterfield.pages;
 
+import hu.masterfield.utils.GlobalTestData;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
