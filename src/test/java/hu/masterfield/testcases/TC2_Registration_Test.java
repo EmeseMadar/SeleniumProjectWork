@@ -2,6 +2,8 @@ package hu.masterfield.testcases;
 
 import hu.masterfield.pages.GDPRBannerPage;
 import hu.masterfield.pages.LoginPage;
+import hu.masterfield.pages.RegistrationFirstPage;
+import hu.masterfield.pages.RegistrationSecondPage;
 import hu.masterfield.utils.Screenshot;
 import io.qameta.allure.Description;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 
@@ -43,13 +46,22 @@ public class TC2_Registration_Test extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         assertTrue(loginPage.isLoaded());
         loginPage.registrationStart();
+        Screenshot.takesScreenshot(driver);
+        logger.info("Registration first page will be opened...");
 
+        RegistrationFirstPage registrationFirstPage = new RegistrationFirstPage(driver);
+        assertTrue(registrationFirstPage.isLoaded());
+        registrationFirstPage.clearTextbox();
+        registrationFirstPage.setTextbox();
+        Screenshot.takesScreenshot(driver);
+        logger.info("Registration second page will be opened...");
 
-
-
+        RegistrationSecondPage registrationSecondPage = new RegistrationSecondPage(driver);
+        assertTrue(registrationSecondPage.isLoaded());
+        registrationSecondPage.clearTextbox();
+        registrationSecondPage.setTextbox();
+        Screenshot.takesScreenshot(driver);
+        logger.info("Registration second page will be opened...");
 
     }
-
-
-
 }
