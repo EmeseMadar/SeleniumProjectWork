@@ -61,7 +61,7 @@ public class TC2_Registration_Test extends BaseTest {
         registrationSecondPage.clearTextbox();
         registrationSecondPage.setTextbox();
         Screenshot.takesScreenshot(driver);
-        logger.info("Registration second page will be opened...");
+        logger.info("Login Page will be opened...");
 
     }
 }
