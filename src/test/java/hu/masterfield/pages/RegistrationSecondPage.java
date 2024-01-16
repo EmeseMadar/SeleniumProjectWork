@@ -1,12 +1,16 @@
 package hu.masterfield.pages;
 
-import hu.masterfield.utils.Consts;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+
+/**
+ * Regisztrációs form második oldalának osztálya
+ */
+@Feature("regisztráció - 2. oldal")
 public class RegistrationSecondPage extends BasePage {
 
     //Az oldalon található webelementek azonosítása, amelyekre szükségünk van.
@@ -71,50 +75,12 @@ public class RegistrationSecondPage extends BasePage {
         return isLoaded;
     }
 
-    @Step("Regisztráció első oldalon lévő adatok törlése.")
-    public RegistrationSecondPage clearTextbox() {
-        clearElement(addressInput, "Address Input");
-        clearElement(localityInput, "Locality Input");
-        clearElement(regionInput, "Region Input");
-        clearElement(postalCodeInput, "PostalCode Input");
-        clearElement(countryInput, "Country Input");
-        clearElement(homePhoneInput, "HomePhone Input");
-        clearElement(mobilePhoneInput, "Mobile Phone Input");
-        clearElement(workPhoneInput, "Work Phone Input");
-
-        return new RegistrationSecondPage(driver);
-    }
-
-    private void clearElement(WebElement element, String elementName) {
-        try {
-            element.clear();
-            logger.info(elementName + " cleared successfully.");
-        } catch (ElementNotInteractableException ex) {
-            logger.warn(elementName + " clearing failed: Element not interactable - " + ex.getMessage());
-            // Handle this situation accordingly
-        } catch (Exception ex) {
-            logger.warn(elementName + " clearing failed: " + ex.getMessage());
-            // Handle this situation accordingly
-        }
-    }
-
-    @Step("Regisztráció első oldalon érvényes adatok megadása.")
-    public void setTextbox() {
-
-        addressInput.sendKeys(globalTestData.getProperty(Consts.REG_ADDRESS));
-        localityInput.sendKeys(globalTestData.getProperty(Consts.REG_LOCALITY));
-        regionInput.sendKeys(globalTestData.getProperty(Consts.REG_REGION));
-        postalCodeInput.sendKeys(globalTestData.getProperty(Consts.REG_POSTAL_CODE));
-        countryInput.sendKeys(globalTestData.getProperty(Consts.REG_COUNTRY));
-        homePhoneInput.sendKeys(globalTestData.getProperty(Consts.REG_HOME_PHONE));
-        mobilePhoneInput.sendKeys(globalTestData.getProperty(Consts.REG_MOBILE_PHONE));
-        workPhoneInput.sendKeys(globalTestData.getProperty(Consts.REG_WORK_PHONE));
-
-        logger.info("Registration() called with: " + "Adress: " + addressInput + ", Locality: " + localityInput + ", Region: " + regionInput + ", Postal Code: " + postalCodeInput + ", Country: " + countryInput + ", Home Phone: " + homePhoneInput + ", Mobile Phone: " + mobilePhoneInput + "Work Phone: " + workPhoneInput);
+    @Step("A regisztrációs űrlap második oldalának kitöltése")
+    public LoginPage RegistrationSecondPage() {
         logger.trace("agreeTermsCheckbox.click() called");
         agreeTermsCheckbox.click();
-        logger.trace("nextButton.click() called");
+        logger.trace("registerButton.click() called");
         registerButton.click();
-        takesScreenshot();
+        return new LoginPage(driver);
     }
 }

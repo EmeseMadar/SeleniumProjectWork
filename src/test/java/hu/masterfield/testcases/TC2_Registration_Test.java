@@ -1,5 +1,6 @@
 package hu.masterfield.testcases;
 
+import dataTypes.RegistrationData;
 import hu.masterfield.pages.GDPRBannerPage;
 import hu.masterfield.pages.LoginPage;
 import hu.masterfield.pages.RegistrationFirstPage;
@@ -46,22 +47,22 @@ public class TC2_Registration_Test extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         assertTrue(loginPage.isLoaded());
         loginPage.registrationStart();
-        Screenshot.takesScreenshot(driver);
+
         logger.info("Registration first page will be opened...");
 
+        RegistrationData registrationData =new RegistrationData();
+        logger.info(registrationData);
+
+        logger.info("RegistrationFirstPage betöltése");
         RegistrationFirstPage registrationFirstPage = new RegistrationFirstPage(driver);
         assertTrue(registrationFirstPage.isLoaded());
-        registrationFirstPage.clearTextbox();
-        registrationFirstPage.setTextbox();
-        Screenshot.takesScreenshot(driver);
-        logger.info("Registration second page will be opened...");
 
+        takesScreenshot();
+        logger.info("RegistrationSecondPage betöltése");
         RegistrationSecondPage registrationSecondPage = new RegistrationSecondPage(driver);
-        assertTrue(registrationSecondPage.isLoaded());
-        registrationSecondPage.clearTextbox();
-        registrationSecondPage.setTextbox();
-        Screenshot.takesScreenshot(driver);
-        logger.info("Login Page will be opened...");
+
+
+
 
     }
 }

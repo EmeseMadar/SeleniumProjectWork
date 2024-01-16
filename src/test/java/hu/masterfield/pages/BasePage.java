@@ -51,12 +51,28 @@ public class BasePage {
             return false;
         }
     }
-    public static void takesScreenshot(){
-        try{
+
+    public static void takesScreenshot() {
+        try {
             Screenshot.takesScreenshot(driver);
-        }catch (IOException ex){
-            logger.warn("BasePage.takesScreenshot was thrown IOException: " +ex.getMessage() + ", " + ex.getStackTrace());
+        } catch (IOException ex) {
+            logger.warn("BasePage.takesScreenshot was thrown IOException: " + ex.getMessage() + ", " + ex.getStackTrace());
         }
+    }
+
+    public void setTextbox(WebElement webElement, String webElementName, String text) {
+        if (webElement.getText().isEmpty()) {
+            //TO DO NOTHING
+        } else {
+            try {
+                webElement.clear();
+                logger.trace(webElementName + ".clear() called");
+            } catch (Exception ex) {
+                logger.warn(webElementName + " textbox cannot clear.");
+            }
+        }
+        webElement.sendKeys(text);
+        logger.trace(webElementName + ".sendKeys() called.");
     }
 
 }
