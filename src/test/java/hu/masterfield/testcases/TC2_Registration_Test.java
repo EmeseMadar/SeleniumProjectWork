@@ -48,18 +48,15 @@ public class TC2_Registration_Test extends BaseTest {
         assertTrue(loginPage.isLoaded());
         loginPage.registrationStart();
 
-        logger.info("Registration first page will be opened...");
-
-        RegistrationData registrationData =new RegistrationData();
+        RegistrationData registrationData = new RegistrationData();
         logger.info(registrationData);
 
-        logger.info("RegistrationFirstPage betöltése");
+        logger.info("Registration First Page will be opened... ");
         RegistrationFirstPage registrationFirstPage = new RegistrationFirstPage(driver);
         assertTrue(registrationFirstPage.isLoaded());
+        RegistrationSecondPage registrationSecondPage = registrationFirstPage.registrationFirstPage();
 
-        takesScreenshot();
-        logger.info("RegistrationSecondPage betöltése");
-        RegistrationSecondPage registrationSecondPage = new RegistrationSecondPage(driver);
+
 
 
 
