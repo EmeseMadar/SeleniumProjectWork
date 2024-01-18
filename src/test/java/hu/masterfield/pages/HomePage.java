@@ -13,87 +13,90 @@ import org.openqa.selenium.support.FindBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Feature("Az oldalon található elemek azonosítása. Ezek szükségesek a HomePage-ről induló műveletekhez.")
+@Feature("Az oldalon található elemek azonosítása. Ezek szükségesek a HomePageről induló\n" +
+        "        műveletekhez.")
+
 public class HomePage extends BasePage {
+
+    /*  Az oldalon található elemek azonosítása. Ezek szükségesek a HomePageről induló
+        műveletekhez.
+     */
 
     protected static Logger logger = LogManager.getLogger(HomePage.class);
     protected static GlobalTestData globalTestData = new GlobalTestData();
 
-
-    //Checking menu
-    @FindBy(id = "checking menu")
+    // Checking menu
+    @FindBy(id = "checking-menu")
     private WebElement checkingMenu;
 
-    //Checking menu ->View Checking
+    // Checking menu -> View Checking
     @FindBy(id = "view-checking-menu-item")
     private WebElement viewCheckingMenuItem;
 
-    //Checking menu -> New Checking
+    // Checking menu -> New Checking
     @FindBy(id = "new-checking-menu-item")
     private WebElement newCheckingMenuItem;
 
-    //Savings Menu
+    // Savings menu
     @FindBy(id = "savings-menu")
     private WebElement savingsMenu;
 
-    //Savings Menu -> View Savings
+    // Savings menu -> View Savings
     @FindBy(id = "view-savings-menu-item")
     private WebElement viewSavingsMenuItem;
 
-    //Savings Menu -> New Savings
+    // Savings menu -> New Savings
     @FindBy(id = "new-savings-menu-item")
     private WebElement newSavingsMenuItem;
 
-    //Welcome Message
-    //FindBy (css = "div.page-title > ol > li")
-    //FindBy (css = "div[class = 'page-title'] li")
+    // Welcome message
     @FindBy(xpath = "//div[@class='page-title']//li")
+    //@FindBy(css="div.page-title li")
+    //@FindBy(css="div[class='page-title'] li")
     private WebElement labelTitle;
 
-    //User avatar / Image
+    // User avatar / picture
     @FindBy(css = "img.user-avatar.rounded-circle")
     private WebElement avatarDropdownMenuButton;
 
-    //User avatar -> My profile
-    //@FindBy (css = "a.nav-link[href='/bank/user/profile']")
-    //@FindBy (css = "a.nav-link[href=\"/bank/user/profile"]")
-    @FindBy(xpath = "//a[contains(text(), 'My Profile')]")
-    private WebElement avatarDropdownMyProfileLink;
+    // Avatar lenyitása -> My Profile
+    // @FindBy(css="a.nav-link[href='/bank/user/profile']")
+    @FindBy(xpath = "//a[contains(text(),'My Profile')]")
+    private WebElement avatartDropdownMyProfileLink;
 
-    ///User avatar -> Change password
-    //@FindBy (css = "a.nav-link[href='/bank/user/password']")
-    @FindBy(xpath = "//a[contains(text(), 'Change Password')]")
+    // Avatar lenyitása -> Change Password
+    // @FindBy(css="a.nav-link[href='/bank/user/password']")
+    @FindBy(xpath = "//a[contains(text(),'Change Password')]")
     private WebElement avatarDropdownChangePasswordLink;
 
-    ///User avatar -> Create Data
-    //@FindBy (css = "a.nav-link[href='/bank/user/create-data']")
-    @FindBy(xpath = "//a[contains(text(), 'Create Data')]")
-    private WebElement avatarDropdownCreateDataLink;
+    // Avatar lenyitása -> Create Data
+    // @FindBy(css="a.nav-link[href='/bank/user/create-data']")
+    @FindBy(xpath = "//a[contains(text(),'Create Data')]")
+    private WebElement avatarDropDownCreateDataLink;
 
-    ///User avatar -> Delete Data
-    //@FindBy (css = "a.nav-link[href='/bank/user/delete-data']")
-    @FindBy(xpath = "//a[contains(text(), 'Delete Data')]")
+    // Avatar lenyitása -> Delete Data
+    // @FindBy(css="a.nav-link[href=\"/bank/user/delete-data\"]")
+    @FindBy(xpath = "//a[contains(text(),'Delete Data')]")
     private WebElement avatarDropdownDeleteDataLink;
 
-    ///User avatar -> Logout
-    //@FindBy (css = "a.nav-link[href='/bank/logout']")
-    @FindBy(xpath = "//a[contains(text(), 'Logout')]")
+    // Avatar lenyitása -> Logout
+//    @FindBy(css="a.nav-link[href=\"/bank/user/logout\"]")
+    @FindBy(xpath = "//a[contains(text(),'Logout')]")
     private WebElement avatarDropdownLogoutLink;
 
-    //Transactions/Transfers -> Deposit
+    // TRANSACTIONS / TRANSFERS -> Deposit
     @FindBy(id = "deposit-menu-item")
     private WebElement depositLink;
 
-    //Transactions/Transfers -> Withdraw
+    // TRANSACTIONS / TRANSFERS -> Withdraw
     @FindBy(id = "withdraw-menu-item")
     private WebElement withdrawLink;
 
     /**
-     * A HomePage-ről elnavigálunk a Create Savings oldalra a menüben.
+     * A HomePageről elnavigál a Create Savings oldalra a menüben.
      *
-     * @return a megnyitott CreateSavings oldal objektuma
+     * @return a megnyitott Create Savings oldal objektuma
      */
-
     @Step("Navigálás a Create Savings oldalra.")
     public CreateSavingsPage gotoNewSavingsPage() {
         logger.info("gotoNewSavingsPage() called.");
@@ -110,13 +113,13 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * A HomePage-ről elnavigálunk a View Savings Oldalra.
+     * HomePageről elnavigál a View Savings oldalra.
      *
-     * @return a megnyitott ViewSavings oldal objektuma.
+     * @return a megnyitott View Savings oldal objektuma
      */
     @Step("Navigálás a View Savings oldalra.")
     public ViewSavingsAccountsPage gotoViewSavingsPage() {
-        logger.info("gotoViewSavingsPage() called");
+        logger.info("gotoViewSavingsPage() called.");
 
         logger.trace("savingsMenu.click()");
         savingsMenu.click();
@@ -130,9 +133,9 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * A HomePage-ről elnavigálunk a Deposit oldalra.
+     * HomePageről elnavigálunk a Deposit oldalra.
      *
-     * @return a megnyitott Deposit oldal objektuma.
+     * @return a megnyitott Deposit oldal objektuma
      */
     @Step("Navigálás a Deposit oldalra.")
     public DepositPage gotoDepositPage() {
@@ -149,16 +152,16 @@ public class HomePage extends BasePage {
     /**
      * HomePageről elnavigálunk a Savings/Transactions oldalra.
      *
-     * @return a megnyitott Savings/Transactions oldal objektuma
+     * @return Savings/Transactions oldal objektuma
      */
-    @Step("Navigálás a TransactionsPage-re.")
+    @Step("Navigálás a 'View Savings' oldalon található tranzakciós táblázat oldalára.")
     public TransactionsPage gotoTransactionsPage() {
-        logger.info("gotoTransactionsPage() called.");
+        logger.info("gotoTransactionsPage() called");
 
-        logger.trace("savingMenu.click()");
+        logger.trace("savingsMenu.click()");
         savingsMenu.click();
 
-        logger.trace("viewSavingsMenuItem.click()");
+        logger.trace("viewSavingsMenuItem.click();");
         viewSavingsMenuItem.click();
 
         takesScreenshot();
@@ -169,9 +172,8 @@ public class HomePage extends BasePage {
     /**
      * HomePageről elnavigálunk a MyProfile oldalra.
      *
-     * @return a megynitott MyProfil oldal objektuma
+     * @return MyProfile oldal objektuma
      */
-
     @Step("Navigálás a profil adatokat megjelenítő és módosító oldalra.")
     public MyProfilePage gotoMyProfilePage() {
         logger.info("gotoMyProfilePage() called");
@@ -180,11 +182,12 @@ public class HomePage extends BasePage {
         avatarDropdownMenuButton.click();
 
         logger.trace("avatarDropdownMyProfileLink.click()");
-        avatarDropdownMyProfileLink.click();
+        avatartDropdownMyProfileLink.click();
 
         takesScreenshot();
 
         return new MyProfilePage(driver);
+
     }
 
     /**
@@ -197,23 +200,23 @@ public class HomePage extends BasePage {
         logger.trace("avatarDropdownMenuButton.click()");
         avatarDropdownMenuButton.click();
 
-        logger.trace("avatarDropdownDeleteDataLink.click();");
+        logger.trace("avatarDropdownDeleteDataLink.click()");
         avatarDropdownDeleteDataLink.click();
 
         takesScreenshot();
     }
 
     /**
-     * Ellenőrzési a HomePage betöltődését
+     * Ellenőrzi a HomePage betöltődését
      *
-     * @return true, ha betöltődött a HommePage
+     * @return true, ha betöltődött a HomePage
      */
-
     @Step("HomePage betöltődésének ellenőrzése.")
     public boolean isLoaded() {
         logger.info("HomePage.isLoaded() called");
-        boolean isLoaded = isLoaded(savingsMenu) && isLoaded(checkingMenu) && isLoaded(avatarDropdownMenuButton);
-        logger.trace("isLoaded" + isLoaded());
+        boolean isLoaded = isLoaded(savingsMenu) && isLoaded(checkingMenu)
+                && isLoaded(avatarDropdownMenuButton);
+        logger.trace("isLoaded= " + isLoaded);
 
         return isLoaded;
     }
@@ -221,16 +224,16 @@ public class HomePage extends BasePage {
     /**
      * Logout megvalósítása
      *
-     * @return LoginPage típusú obejktum
+     * @return LoginPage típusú objektum
      */
     @Step("Logout megvalósítása.")
     public LoginPage logout() {
         logger.info("logout() called");
 
-        logger.trace("avatarDropdownMenuButton.click()");
+        logger.trace("avatarMenuDropdownButton.click()");
         avatarDropdownMenuButton.click();
 
-        logger.trace("avatarDropdownLogoutLink.click()");
+        logger.trace("avatartDropdownLogoutLink.click()");
         avatarDropdownLogoutLink.click();
 
         takesScreenshot();
@@ -243,22 +246,23 @@ public class HomePage extends BasePage {
      */
     @Step("HomePage ellenőrzése.")
     public void validateHomePage() {
-        logger.info("validateHomepage called");
+        logger.info("validateHomePage called");
         assertEquals("Digital Bank", driver.getTitle());
         assertTrue(driver.getCurrentUrl().endsWith("/bank/home"));
-        assertEquals("Welcome " + globalTestData.getProperty(Consts.REG_FIRST_NAME), labelTitle.getText());
+        assertEquals("Welcome " + globalTestData.getProperty(Consts.REG_FIRST_NAME)
+                , labelTitle.getText());
     }
 
     /**
-     * HomePage ellenőrzése profit módosítása után.
+     * HomePage ellenőrzése profil módosítása után.
      */
-    @Step("HomePage ellenőrzése profil módosítása után.")
+    @Step("HomePage ellenőrzése profil mósosítása után.")
     public void validateHomePageAfterModifyProfile() {
-        logger.info("validateHomepageAfterModifyProfile called");
+        logger.info("validateHomePageAfterModifyProfile called");
         assertEquals("Digital Bank", driver.getTitle());
         assertTrue(driver.getCurrentUrl().endsWith("/bank/home"));
-        assertEquals("Welcome " + globalTestData.getProperty(Consts.MOD_FIRST_NAME), labelTitle.getText());
-        takesScreenshot();
+        assertEquals("Welcome " + globalTestData.getProperty(Consts.MOD_FIRST_NAME)
+                , labelTitle.getText());
     }
 
     public HomePage(WebDriver driver) {

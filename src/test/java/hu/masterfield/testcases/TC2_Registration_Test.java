@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * TC2 - Sikeres regisztráció érvényes adatok megadásával
@@ -44,9 +45,9 @@ public class TC2_Registration_Test extends BaseTest {
         Screenshot.takesScreenshot(driver);
         logger.info("Login page will be opened...");
 
-        LoginPage loginPage = new LoginPage(driver);
-        assertTrue(loginPage.isLoaded());
-        loginPage.registrationStart();
+        LoginPage loginPageOne = new LoginPage(driver);
+        assertTrue(loginPageOne.isLoaded());
+        loginPageOne.registrationStart();
 
         RegistrationData registrationData = new RegistrationData();
         logger.info(registrationData);
@@ -54,12 +55,25 @@ public class TC2_Registration_Test extends BaseTest {
         logger.info("Registration First Page will be opened... ");
         RegistrationFirstPage registrationFirstPage = new RegistrationFirstPage(driver);
         assertTrue(registrationFirstPage.isLoaded());
+        Screenshot.takesScreenshot(driver);
         RegistrationSecondPage registrationSecondPage = registrationFirstPage.registrationFirstPage();
 
 
+        logger.info("Registration Second Page will be opened... ");
+        assertTrue(registrationSecondPage.isLoaded());
+        Screenshot.takesScreenshot(driver);
+        LoginPage loginPageTwo = registrationSecondPage.registrationSecondPage();
 
+        //Ellenőrzi, hogy a regisztráció sikeres volt-e, erről megjelent-e a szöveg
+        logger.info("Is registration successful?");
+        assertTrue(loginPageTwo.registrationIsSuccesful());
+        Screenshot.takesScreenshot(driver);
 
-
-
+        if (loginPageTwo.registrationIsSuccesful()) {
+            logger.info("TEST PASSED");
+            // TEST PASSED
+        } else {
+            fail("Registration failed.");
+        }
     }
 }

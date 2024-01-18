@@ -1,10 +1,13 @@
 package hu.masterfield.pages;
 
+import dataTypes.RegistrationData;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -14,6 +17,8 @@ import org.openqa.selenium.support.FindBy;
 public class RegistrationSecondPage extends BasePage {
 
     //Az oldalon található webelementek azonosítása, amelyekre szükségünk van.
+
+    protected static Logger logger = LogManager.getLogger(RegistrationSecondPage.class);
 
     //Lakcím megadása
     //@FindBy(id = "address")
@@ -49,11 +54,13 @@ public class RegistrationSecondPage extends BasePage {
     @FindBy(id = "workPhone")
     private WebElement workPhoneInput;
 
-    //Általános Szerződési feltételek elfogadása, választó
+    //Általános Szerződési Feltételek elfogadása, választó
     @FindBy(id = "agree-terms")
     private WebElement agreeTermsCheckbox;
 
     //submit gomb
+    //@FindBy(css = "button[type='submit']")
+    //@FindBy(xpath = "//button[@type='submit' and text()='Register']")
     @FindBy(xpath = "//form/button")
     private WebElement registerButton;
 
@@ -81,6 +88,42 @@ public class RegistrationSecondPage extends BasePage {
         agreeTermsCheckbox.click();
         logger.trace("registerButton.click() called");
         registerButton.click();
+        return new LoginPage(driver);
+    }
+
+    /**
+     * Péládnyosítjuk a RegistrationData osztályt, hogy az oldalon található input mezőket a GlobalTestData.properties fájlban megadott adatokkal.
+     * Így a regisztráció 2. oldalának kitöltésekor nem kell felsorolni a sok bemenő paramétert.
+     */
+    RegistrationData registrationData = new RegistrationData();
+
+    /**
+     * Regisztráció második oldalát valósítjuk meg.
+     */
+    @Step("Regisztrációs űrlap második oldalának kitöltése.")
+    public LoginPage registrationSecondPage() {
+        logger.info("RegistrationSecondPage() called.");
+        setTextbox(addressInput, "addressInput", registrationData.getAddress());
+        setTextbox(localityInput, "localityInput", registrationData.getLocality());
+        setTextbox(regionInput, "regionInput", registrationData.getRegion());
+        setTextbox(postalCodeInput, "postalCodeInput", registrationData.getPostalCode());
+        setTextbox(countryInput, "countryInput", registrationData.getCountry());
+        setTextbox(homePhoneInput, "homePhoneInput", registrationData.getHomePhone());
+        setTextbox(mobilePhoneInput, "mobilePhoneInput", registrationData.getMobilePhone());
+        setTextbox(workPhoneInput, "workPhoneInput", registrationData.getWorkPhone());
+
+        logger.trace("agreeTermsCheckBox.click()");
+        if (agreeTermsCheckbox.isSelected()) {
+            //TO DO NOTHING
+        } else {
+            agreeTermsCheckbox.click();
+        }
+
+        takesScreenshot();
+
+        logger.trace("registerButton.click()");
+        registerButton.click();
+
         return new LoginPage(driver);
     }
 }

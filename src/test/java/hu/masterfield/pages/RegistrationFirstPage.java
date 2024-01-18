@@ -4,6 +4,8 @@ import dataTypes.RegistrationData;
 import hu.masterfield.utils.Consts;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +19,9 @@ import org.openqa.selenium.support.ui.Select;
 public class RegistrationFirstPage extends BasePage {
 
     //Az oldalon található webelementek azonosítása, amelyekre szükségünk van.
+
+    protected static Logger logger = LogManager.getLogger(RegistrationFirstPage.class);
+
 
     //megszólítás megadása
     @FindBy(id = "title")
