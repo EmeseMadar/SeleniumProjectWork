@@ -258,9 +258,9 @@ public class HomePage extends BasePage {
      */
     @Step("HomePage ellenőrzése profil mósosítása után.")
     public void validateHomePageAfterModifyProfile() {
-        logger.info("validateHomePageAfterModifyProfile called");
+        logger.info("validateHomePageAfterModifyProfile() called");
         assertEquals("Digital Bank", driver.getTitle());
-        assertTrue(driver.getCurrentUrl().endsWith("/bank/home"));
+        assertTrue(driver.getCurrentUrl().endsWith("/bank/user/profile"));
         assertEquals("Welcome " + globalTestData.getProperty(Consts.MOD_FIRST_NAME)
                 , labelTitle.getText());
     }
