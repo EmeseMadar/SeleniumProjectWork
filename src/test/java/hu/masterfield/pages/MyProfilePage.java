@@ -88,8 +88,8 @@ public class MyProfilePage extends BasePage {
     }
 
     /**
-     * Péládnyosítjuk a RegistrationData osztályt, hogy az oldalon található input mezőket a GlobalTestData.properties fájlban megadott adatokkal.
-     * Így a regisztráció 2. oldalának kitöltésekor nem kell felsorolni a sok bemenő paramétert.
+     * Péládnyosítjuk a ModifyProfileData osztályt, hogy az oldalon található input mezőket a GlobalTestData.properties fájlban megadott adatokkal.
+     * Így a regisztráció profil módosításakor nem kell felsorolni a sok bemenő paramétert.
      */
     ModifyProfileData modifyProfileData = new ModifyProfileData();
 

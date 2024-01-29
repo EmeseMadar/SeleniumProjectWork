@@ -29,7 +29,7 @@ public class TC5_ModifyProfile_Test extends BaseTest {
     @Tag("MyProfile")
     @Tag("Regisztráció")
     @Tag("Módosítás")
-    public void TC5_ModifyProfile(TestInfo testInfo) {
+    public void TC5_ModifyProfile(TestInfo testInfo) throws InterruptedException {
 
         logger.info(testInfo.getDisplayName() + " started.");
 
@@ -53,6 +53,8 @@ public class TC5_ModifyProfile_Test extends BaseTest {
         MyProfilePage myProfilePage = homePage.gotoMyProfilePage();
 
         MyProfilePage myProfilePageModified = myProfilePage.modifyProfile();
+        driver.navigate().refresh();
+        Thread.sleep(2000);
         HomePage homePage1 = new HomePage(driver);
         homePage1.validateHomePageAfterModifyProfile();
 
