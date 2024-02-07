@@ -22,7 +22,7 @@ public class GDPRBannerPage extends BasePage {
     private WebElement okButton;
 
     //Az oldal sütiket használ szöveg
-    //Findby(xpath ="//p[@class='cc-nb-title' and text()='Az oldal sütiket haszbál']")
+    //Findby(xpath ="//p[@class='cc-nb-title' and text()='Az oldal sütiket használ']")
 
     @FindBy(id = "cc-nb-title")
     private WebElement cookieUsageMessage;

@@ -43,6 +43,14 @@ public class ViewSavingsAccountsPage extends BasePage {
     @FindBy(xpath = "//h1[text()='View Savings Accounts']")
     private WebElement pageTitle;
 
+    //No Accounts szöveg
+    //You currently do not have accounts on record to view. Please create a new account.
+    @FindBy (xpath = "//*[@id=\"largeModalLabel\"]")
+    private WebElement noAccountsText;
+
+    //Continue gomb
+    @FindBy (xpath = "//*[@id=\"emptyAccounts\"]/div/div/div[3]/a/button")
+    private WebElement continueButton;
 
     public ViewSavingsAccountsPage(WebDriver driver) {
         super(driver);
@@ -138,6 +146,13 @@ public class ViewSavingsAccountsPage extends BasePage {
             }
         }
         return returnValue;
+    }
+    @Step("ViewSavingsAccountPage betöltésének ellenőrzése accountok törlését követően.")
+    public boolean isLoadedAfterDeletingData() {
+        boolean isLoaded = isLoaded(pageTitle) && isLoaded(noAccountsText) && isLoaded(continueButton);
+        logger.info("Page title: " + pageTitle.getText());
+        logger.trace("isLoaded = " + isLoaded);
+        return isLoaded;
     }
 }
 

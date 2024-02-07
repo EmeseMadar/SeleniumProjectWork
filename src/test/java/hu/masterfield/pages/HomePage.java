@@ -92,7 +92,15 @@ public class HomePage extends BasePage {
     @FindBy(id = "withdraw-menu-item")
     private WebElement withdrawLink;
 
-    /**
+    //Account Balance Summary
+    @FindBy(xpath = "//*[@id=\"right-panel\"]/div[2]/div/div/div[1]/div/div/h4")
+    private WebElement accountBalanceSummary;
+
+    //Account Balance Summary Data
+    @FindBy(xpath ="//script[contains(text(),'Balance Summary Bar Chart')]")
+    private WebElement accountBalanceSummaryData;
+
+     /**
      * A HomePageről elnavigál a Create Savings oldalra a menüben.
      *
      * @return a megnyitott Create Savings oldal objektuma
@@ -194,7 +202,7 @@ public class HomePage extends BasePage {
      * Adatok törlése
      */
     @Step("Adatok törlése.")
-    public void deleteData() {
+    public HomePage deleteData() {
         logger.info("deleteData() called");
 
         logger.trace("avatarDropdownMenuButton.click()");
@@ -204,7 +212,22 @@ public class HomePage extends BasePage {
         avatarDropdownDeleteDataLink.click();
 
         takesScreenshot();
+        return new HomePage(driver);
     }
+    /**
+     * Adatok törlésének ellenőrzése
+     */
+    @Step("Adatok törlésének ellenőrzése.")
+    public boolean isAccountBalanceSummaryEmpty() {
+        logger.info("Checking if Account Balance Summary is empty");
+        return accountBalanceSummary.getText().isEmpty();
+    }
+
+    public boolean isAccountBalanceSummaryDataEmpty() {
+        logger.info("Checking if Account Balance Summary Data is empty");
+        return accountBalanceSummaryData.getText().isEmpty();
+    }
+
 
     /**
      * Ellenőrzi a HomePage betöltődését
