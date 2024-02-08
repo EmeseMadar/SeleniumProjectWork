@@ -2,8 +2,6 @@ package apitestcases;
 
 import dataTypes.ModifyProfileData;
 import dataTypes.RegistrationData;
-import groovy.xml.MarkupBuilder;
-import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
@@ -35,45 +33,50 @@ public class TC6_ModifyProfileData extends BaseAPITest {
     @Test
     public void getUserByUserName() {
         logger.info("Start /api/v1/user/find method.");
-        Response response = given()
+        Response responseOne = given()
                 .contentType(ContentType.JSON)
                 .header(AUTH_HEADER, "Bearer " + authToken)
                 .queryParam("username", emailAddress)
                 .when()
                 .get("/api/v1/user/find");
-        response.prettyPrint();
-        response.then()
+        responseOne.prettyPrint();
+        responseOne.then()
                 .statusCode(200)
                 .body("userProfile.emailAddress", equalTo(emailAddress));
         logger.info("End /api/v1/user/find method.");
 
         /* Ellenőrizzük, hogy a válaszban helyesek-e a regisztrációs adatok.*/
-        assertEquals(registrationData.getFirstName(), response.path("userProfile.firstName"));
-        assertEquals(registrationData.getLastName(), response.path("userProfile.lastName"));
-        assertEquals(registrationData.getEmailAddress(), response.path("userProfile.emailAddress"));
-        assertEquals(registrationData.getSocialSecurityNumber(), response.path("userProfile.ssn"));
-        assertEquals(registrationData.getAddress(), response.path("userProfile.address"));
-        assertEquals(registrationData.getCountry(), response.path("userProfile.country"));
-        assertEquals(registrationData.getDateOfBirth(), response.path("userProfile.dob"));
-        assertEquals(registrationData.getGender(), response.path("userProfile.gender"));
-        assertEquals(registrationData.getTitle(), response.path("userProfile.title"));
-        assertEquals(registrationData.getLocality(), response.path("userProfile.locality"));
-        assertEquals(registrationData.getPostalCode(), response.path("userProfile.postalCode"));
-        assertEquals(registrationData.getHomePhone(), response.path("userProfile.homePhone"));
-        assertEquals(registrationData.getMobilePhone(), response.path("userProfile.mobilePhone"));
-        assertEquals(registrationData.getWorkPhone(), response.path("userProfile.workPhone"));
-    }
+        assertEquals(registrationData.getFirstName(), responseOne.path("userProfile.firstName"));
+        assertEquals(registrationData.getLastName(), responseOne.path("userProfile.lastName"));
+        assertEquals(registrationData.getEmailAddress(), responseOne.path("userProfile.emailAddress"));
+        assertEquals(registrationData.getSocialSecurityNumber(), responseOne.path("userProfile.ssn"));
+        assertEquals(registrationData.getAddress(), responseOne.path("userProfile.address"));
+        assertEquals(registrationData.getCountry(), responseOne.path("userProfile.country"));
+        assertEquals(registrationData.getDateOfBirth(), responseOne.path("userProfile.dob"));
+        assertEquals(registrationData.getGender(), responseOne.path("userProfile.gender"));
+        assertEquals(registrationData.getTitle(), responseOne.path("userProfile.title"));
+        assertEquals(registrationData.getLocality(), responseOne.path("userProfile.locality"));
+        assertEquals(registrationData.getPostalCode(), responseOne.path("userProfile.postalCode"));
+        assertEquals(registrationData.getHomePhone(), responseOne.path("userProfile.homePhone"));
+        assertEquals(registrationData.getMobilePhone(), responseOne.path("userProfile.mobilePhone"));
+        assertEquals(registrationData.getWorkPhone(), responseOne.path("userProfile.workPhone"));
 
-    /**
-     * Ez a teszt módosítja egy meglévő profil adatait a ModifyProfileData fájlban megadott adatokkal, ellenőrzi a profil létrejöttét.
-     * PUT /api/v1/user/profile
-     * updateUserProfile
-     * user-controlleer ->/api/v1/user/profile
-     */
-    ModifyProfileData modifyProfileData = new ModifyProfileData();
+        // Az id érték kinyerése és tárolása egy változóban
+        userId = responseOne.path("id");
 
-    @Test
-    public void ModifyProfileData() {
+        // A kinyert id érték ellenőrzése vagy további felhasználása
+        System.out.println("User ID: " + userId);
+
+
+        /**
+         * Ez a teszt módosítja egy meglévő profil adatait a ModifyProfileData fájlban megadott adatokkal, ellenőrzi a profil létrejöttét.
+         * PUT /api/v1/user/profile
+         * updateUserProfile
+         * user-controlleer ->/api/v1/user/profile
+         */
+        ModifyProfileData modifyProfileData = new ModifyProfileData();
+
+
         logger.info("Start PUT /api/v1/user/profile method.");
 
         Map<String, Object> requestBody = new HashMap<>();
@@ -92,14 +95,15 @@ public class TC6_ModifyProfileData extends BaseAPITest {
         requestBody.put("workPhone", modifyProfileData.getWorkPhone());
 
 
-        Response response = given()
+        Response responseTwo = given()
                 .contentType(ContentType.JSON)
                 .header(AUTH_HEADER, "Bearer " + authToken)
+                .queryParam("id", userId)
                 .body(requestBody)
                 .when()
                 .put("/api/v1/user/profile");
-        response.prettyPrint();
-        response.then()
+        responseTwo.prettyPrint();
+        responseTwo.then()
                 .statusCode(200);
         logger.info("End PUT /api/v1/user/profile method.");
 
@@ -107,30 +111,30 @@ public class TC6_ModifyProfileData extends BaseAPITest {
         /* A regisztrációs adatoknál megadott email címet felhasználva megkeressük a profilt és kiírjuk a profil adatait.*/
 
         logger.info("Start /api/v1/user/find method.");
-        Response responseTwo = given()
+        Response responseThree = given()
                 .contentType(ContentType.JSON)
                 .header(AUTH_HEADER, "Bearer " + authToken)
                 .queryParam("username", emailAddress)
                 .when()
                 .get("/api/v1/user/find");
-        responseTwo.prettyPrint();
-        responseTwo.then()
+        responseThree.prettyPrint();
+        responseThree.then()
                 .statusCode(200)
                 .body("userProfile.emailAddress", equalTo(emailAddress));
         logger.info("End /api/v1/user/find method.");
 
-        /* Ellenőrizzük, hogy a válaszban helyesek-e a módosított adatok.
-        assertEquals(modifyProfileData.getFirstName(), response.path("userProfile.firstName"));
-        assertEquals(modifyProfileData.getLastName(), response.path("userProfile.lastName"));
-        assertEquals(modifyProfileData.getAddress(), response.path("userProfile.address"));
-        assertEquals(modifyProfileData.getCountry(), response.path("userProfile.country"));
-        assertEquals(modifyProfileData.getGender(), response.path("userProfile.gender"));
-        assertEquals(modifyProfileData.getTitle(), response.path("userProfile.title"));
-        assertEquals(modifyProfileData.getLocality(), response.path("userProfile.locality"));
-        assertEquals(modifyProfileData.getPostalCode(), response.path("userProfile.postalCode"));
-        assertEquals(modifyProfileData.getHomePhone(), response.path("userProfile.homePhone"));
-        assertEquals(modifyProfileData.getMobilePhone(), response.path("userProfile.mobilePhone"));
-        assertEquals(modifyProfileData.getWorkPhone(), response.path("userProfile.workPhone")); */
+        /*Ellenőrizzük, hogy a válaszban helyesek-e a módosított adatok.
+        assertEquals(modifyProfileData.getFirstName(), responseThree.path("userProfile.firstName"));
+        assertEquals(modifyProfileData.getLastName(), responseThree.path("userProfile.lastName"));
+        assertEquals(modifyProfileData.getAddress(), responseThree.path("userProfile.address"));
+        assertEquals(modifyProfileData.getCountry(), responseThree.path("userProfile.country"));
+        assertEquals(modifyProfileData.getGender(), responseThree.path("userProfile.gender"));
+        assertEquals(modifyProfileData.getTitle(), responseThree.path("userProfile.title"));
+        assertEquals(modifyProfileData.getLocality(), responseThree.path("userProfile.locality"));
+        assertEquals(modifyProfileData.getPostalCode(), responseThree.path("userProfile.postalCode"));
+        assertEquals(modifyProfileData.getHomePhone(), responseThree.path("userProfile.homePhone"));
+        assertEquals(modifyProfileData.getMobilePhone(), responseThree.path("userProfile.mobilePhone"));
+        assertEquals(modifyProfileData.getWorkPhone(), responseThree.path("userProfile.workPhone"));*/
 
     }
 }
