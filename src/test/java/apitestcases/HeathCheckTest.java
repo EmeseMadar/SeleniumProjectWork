@@ -17,12 +17,13 @@ public class HeathCheckTest extends BaseAPITest {
 
         Response response = given()
                 .contentType(ContentType.JSON)
-                .when().get("/api/v1/health");
+                .when()
+                .get("/api/v1/health");
         response.prettyPrint();
 
         response.then()
                 .statusCode(200);
         //        .body("", equalTo("Application Available"));
-    assertEquals(response.prettyPrint(),"Application Available");
+        assertEquals(response.prettyPrint(), "Application Available");
     }
 }

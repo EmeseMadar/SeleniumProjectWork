@@ -66,7 +66,7 @@ public class TC2_RegistrationAPITest extends BaseAPITest {
         /* A globalTestData.properties fájlból kiolvasott emailcímet ellenőrizzük, amivel beregisztráltunk.*/
 
         String emailAddress = registrationData.getEmailAddress();
-        /* A regisztrációs adatoknál megadott email címet felhasználva megkeresük a profilt és kiírjuk a profil adatait.*/
+        /* A regisztrációs adatoknál megadott email címet felhasználva megkeressük a profilt és kiírjuk a profil adatait.*/
 
         logger.info("Start /api/v1/user/find method.");
         Response response = given()

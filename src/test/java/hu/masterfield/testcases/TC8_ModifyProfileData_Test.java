@@ -11,24 +11,26 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TC8_ModifyProfileData_Test extends BaseTest {
     /**
-     * TC5 - Regisztrációs adatok módosítása, megadott adatokkal.
+     * TC8 - Regisztrációs adatok módosítása, megadott adatokkal.
      */
 
     protected static Logger logger = LogManager.getLogger(TC8_ModifyProfileData_Test.class);
     protected static GlobalTestData globalTestData = new GlobalTestData();
 
     @Test
-    @DisplayName("TC5_ModifyProfile")
-    @Description("TC5 - Regisztrációs adatok módosítása, megadott adatokkal.")
-    @Tag("TC5")
+    @DisplayName("TC8_ModifyProfile")
+    @Description("TC8 - Regisztrációs adatok módosítása, megadott adatokkal.")
+    @Tag("TC8")
     @Tag("MyProfile")
     @Tag("Regisztráció")
     @Tag("Módosítás")
-    public void TC5_ModifyProfile(TestInfo testInfo) throws InterruptedException {
+    public void TC8_ModifyProfile(TestInfo testInfo) throws InterruptedException, IOException {
 
         logger.info(testInfo.getDisplayName() + " started.");
 
@@ -48,14 +50,29 @@ public class TC8_ModifyProfileData_Test extends BaseTest {
         assertTrue(homePage.isLoaded());
         homePage.validateHomePage();
 
-        //Regisztráiós adatok módosításának megvalósítása
+        //Navigálás a Profil oldalra
         MyProfilePage myProfilePage = homePage.gotoMyProfilePage();
-        MyProfilePage myProfilePageModified = myProfilePage.modifyProfile();
-        driver.navigate().refresh();
-        Thread.sleep(2000);
-        HomePage homePage1 = new HomePage(driver);
-        //homePage1.validateHomePageAfterModifyProfile();
+        assertTrue(myProfilePage.isLoaded());
+        logger.trace("My Profile Page is Loaded" + myProfilePage.isLoaded());
 
+        //Regisztráiós adatok módosításának megvalósítása
+        logger.trace("modifyProfile() called.");
+        MyProfilePage myProfilePageModified = myProfilePage.modifyProfile();
+
+        //Oldal frissítése
+        driver.navigate().refresh();
+
+        //Profil oldal betöltésének ellenőrzése
+        logger.info("isLoadedUpdatePorfile() called.");
+        assertTrue(myProfilePage.isLoadedUpdateProfile());
+
+
+        //HomePage ellenőrzése módosítás után, "Welcome ModifiedName"
+        HomePage homePage1 = new HomePage(driver);
+        logger.info("validateHomePageAfterModifyProfile() called.");
+        homePage1.validateHomePageAfterModifyProfile();
+
+        takesScreenshot();
     }
 }
 

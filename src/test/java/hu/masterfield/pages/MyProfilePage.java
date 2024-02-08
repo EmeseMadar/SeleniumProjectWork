@@ -68,6 +68,14 @@ public class MyProfilePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"right-panel\"]/div[2]/div/div/div/div/form/div[2]/button[1]")
     private WebElement submitButton;
 
+    //reset gomb
+    @FindBy(xpath = "//button[@type='reset']")
+    private WebElement resetButton;
+
+    //Update Profile
+    @FindBy(xpath = "//div/strong[text()='Update Profile']")
+    private WebElement profileUpdated;
+
     //konstruktor
     public MyProfilePage(WebDriver driver) {
         super(driver);
@@ -104,17 +112,34 @@ public class MyProfilePage extends BasePage {
         Select selectTitle = new Select(titleSelect);
         selectTitle.selectByVisibleText(modifyProfileData.getTitle());
 
+        firstNameInput.clear();
         setTextbox(firstNameInput, "firstNameInput", modifyProfileData.getFirstName());
+
+        lastNameInput.clear();
         setTextbox(lastNameInput, "lastNameInput", modifyProfileData.getLastName());
 
+        homePhoneInput.clear();
         setTextbox(homePhoneInput, "homePhoneInput", modifyProfileData.getHomePhone());
+
+        mobilePhoneInput.clear();
         setTextbox(mobilePhoneInput, "mobilePhoneInput", modifyProfileData.getMobilePhone());
+
+        workPhoneInput.clear();
         setTextbox(workPhoneInput, "workPhoneInput", modifyProfileData.getWorkPhone());
 
+        addressInput.clear();
         setTextbox(addressInput, "addressInput", modifyProfileData.getAddress());
+
+        localityInput.clear();
         setTextbox(localityInput, "localityInput", modifyProfileData.getLocality());
+
+        regionInput.clear();
         setTextbox(regionInput, "regionInput", modifyProfileData.getRegion());
+
+        postalCodeInput.clear();
         setTextbox(postalCodeInput, "postalCodeInput", modifyProfileData.getPostalCode());
+
+        countryInput.clear();
         setTextbox(countryInput, "countryInput", modifyProfileData.getCountry());
 
         takesScreenshot();
@@ -124,7 +149,28 @@ public class MyProfilePage extends BasePage {
 
         return new MyProfilePage(driver);
     }
+    @Step("Update Profile oldal betöltésének ellenőrzése")
+    public boolean isLoadedUpdateProfile() {
+        boolean isLoaded = isLoaded(profileUpdated)
+                && isLoaded(titleSelect)
+                && isLoaded(firstNameInput)
+                && isLoaded(lastNameInput)
+                && isLoaded(homePhoneInput)
+                && isLoaded(mobilePhoneInput)
+                && isLoaded(workPhoneInput)
+                && isLoaded(addressInput)
+                && isLoaded(localityInput)
+                && isLoaded(regionInput)
+                && isLoaded(postalCodeInput)
+                && isLoaded(countryInput)
+                && isLoaded(submitButton)
+                && isLoaded(resetButton);
+        logger.trace("Update profile isloaded " + isLoaded);
+        return isLoaded;
+    }
+
 }
+
 
 
 

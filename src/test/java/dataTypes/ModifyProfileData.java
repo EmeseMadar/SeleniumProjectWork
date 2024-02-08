@@ -22,6 +22,7 @@ public class ModifyProfileData {
     private String title;
     private String firstName;
     private String lastName;
+    private String gender;
 
     private String homePhone;
     private String mobilePhone;
@@ -41,6 +42,7 @@ public class ModifyProfileData {
         this.title = globalTestData.getProperty(Consts.MOD_TITLE);
         this.firstName = globalTestData.getProperty(Consts.MOD_FIRST_NAME);
         this.lastName = globalTestData.getProperty(Consts.MOD_LAST_NAME);
+        this.gender = globalTestData.getProperty(Consts.MOD_GENDER);
         this.homePhone = globalTestData.getProperty(Consts.MOD_HOME_PHONE);
         this.mobilePhone = globalTestData.getProperty(Consts.MOD_MOBILE_PHONE);
         this.workPhone = globalTestData.getProperty(Consts.MOD_WORK_PHONE);

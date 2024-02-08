@@ -8,7 +8,7 @@ package hu.masterfield.utils;
 public class Consts {
     // Konstansok az applikációhoz
 
-    public static final String APPLICATION_URL ="application.url";
+    public static final String APPLICATION_URL = "application.url";
 
     //Konstansok az elérési utakhoz:
     public static final String CONFIG_PROPERTIES = "/config.properties";
@@ -51,6 +51,8 @@ public class Consts {
     public static final String MOD_TITLE = "mod.title";
     public static final String MOD_FIRST_NAME = "mod.firstName";
     public static final String MOD_LAST_NAME = "mod.lastName";
+
+    public static final String MOD_GENDER = "mod.gender";
     public static final String MOD_ADDRESS = "mod.address";
     public static final String MOD_LOCALITY = "mod.locality";
     public static final String MOD_REGION = "mod.region";
